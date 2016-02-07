@@ -1,0 +1,1 @@
+Please note, I've not managed to get this printing centrally yet, this config is what I run on my printers. I need to spend some time to sort out the Auto-Level Grid properly, but this does work, it just doesn't print centrally, to get it to print centrally, set an offset in your slicer of x=-10, Y=10.
