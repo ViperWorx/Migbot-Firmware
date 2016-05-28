@@ -1,8 +1,30 @@
 /**
+ * Marlin 3D Printer Firmware
+ * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ *
+ * Based on Sprinter and grbl.
+ * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+/**
  * Dutch
  *
  * LCD Menu Messages
- * See also documentation/LCDLanguageFont.md
+ * See also https://github.com/MarlinFirmware/Marlin/wiki/LCD-Language
  *
  */
 #ifndef LANGUAGE_NL_H
@@ -16,11 +38,16 @@
 #define WELCOME_MSG                         MACHINE_NAME " gereed."
 #define MSG_SD_INSERTED                     "Kaart ingestoken"
 #define MSG_SD_REMOVED                      "Kaart verwijderd"
-#define MSG_MAIN                            "Main"
+#define MSG_MAIN                            "Hoofdmenu"
 #define MSG_AUTOSTART                       "Autostart"
 #define MSG_DISABLE_STEPPERS                "Motoren uit"
 #define MSG_AUTO_HOME                       "Auto home"
-#define MSG_SET_HOME_OFFSETS                "Set home offsets"
+#define MSG_LEVEL_BED_HOMING                "Homing XYZ"
+#define MSG_LEVEL_BED_WAITING               "Klik voor begin"
+#define MSG_LEVEL_BED_DONE                  "Bed level kompl."
+#define MSG_LEVEL_BED_CANCEL                "Bed level afbr."
+#define MSG_SET_HOME_OFFSETS                "Zet home offsets"
+#define MSG_HOME_OFFSETS_APPLIED            "H offset toegep."
 #define MSG_SET_ORIGIN                      "Nulpunt instellen"
 #define MSG_PREHEAT_PLA                     "PLA voorverwarmen"
 #define MSG_PREHEAT_PLA_N                   "PLA voorverw. "
@@ -46,6 +73,7 @@
 #define MSG_MOVE_1MM                        "Verplaats 1mm"
 #define MSG_MOVE_10MM                       "Verplaats 10mm"
 #define MSG_SPEED                           "Snelheid"
+#define MSG_BED_Z                           "Bed Z"
 #define MSG_NOZZLE                          "Nozzle"
 #define MSG_BED                             "Bed"
 #define MSG_FAN_SPEED                       "Fan snelheid"
@@ -66,14 +94,15 @@
 #define MSG_VZ_JERK                         "Vz-jerk"
 #define MSG_VE_JERK                         "Ve-jerk"
 #define MSG_VMAX                            "Vmax "
-#define MSG_X                               "x"
-#define MSG_Y                               "y"
-#define MSG_Z                               "z"
-#define MSG_E                               "e"
+#define MSG_X                               "X"
+#define MSG_Y                               "Y"
+#define MSG_Z                               "Z"
+#define MSG_E                               "E"
 #define MSG_VMIN                            "Vmin"
 #define MSG_VTRAV_MIN                       "VTrav min"
 #define MSG_AMAX                            "Amax "
 #define MSG_A_RETRACT                       "A-retract"
+#define MSG_A_TRAVEL                        "A-travel"
 #define MSG_XSTEPS                          "Xsteps/mm"
 #define MSG_YSTEPS                          "Ysteps/mm"
 #define MSG_ZSTEPS                          "Zsteps/mm"
@@ -101,8 +130,8 @@
 #define MSG_RESUMING                        "Print hervatten"
 #define MSG_PRINT_ABORTED                   "Print afgebroken"
 #define MSG_NO_MOVE                         "Geen beweging."
-#define MSG_KILLED                          "AFGEBROKEN. "
-#define MSG_STOPPED                         "GESTOPT. "
+#define MSG_KILLED                          "Afgebroken. "
+#define MSG_STOPPED                         "Gestopt. "
 #define MSG_CONTROL_RETRACT                 "Retract mm"
 #define MSG_CONTROL_RETRACT_SWAP            "Ruil Retract mm"
 #define MSG_CONTROL_RETRACTF                "Retract  F"
@@ -113,23 +142,32 @@
 #define MSG_AUTORETRACT                     "AutoRetr."
 #define MSG_FILAMENTCHANGE                  "Verv. Filament"
 #define MSG_INIT_SDCARD                     "Init. SD kaart"
-#define MSG_CNG_SDCARD                      "Verv. SD card"
+#define MSG_CNG_SDCARD                      "Verv. SD Kaart"
 #define MSG_ZPROBE_OUT                      "Z probe uit. bed"
-#define MSG_POSITION_UNKNOWN                "Home X/Y voor Z"
+#define MSG_YX_UNHOMED                      "Home X/Y voor Z"
 #define MSG_ZPROBE_ZOFFSET                  "Z Offset"
 #define MSG_BABYSTEP_X                      "Babystap X"
 #define MSG_BABYSTEP_Y                      "Babystap Y"
 #define MSG_BABYSTEP_Z                      "Babystap Z"
 #define MSG_ENDSTOP_ABORT                   "Endstop afbr."
-#define MSG_END_HOUR                        "hours"
-#define MSG_END_MINUTE                      "minutes"
+#define MSG_HEATING_FAILED_LCD              "voorverw. fout"
+#define MSG_ERR_REDUNDANT_TEMP              "Redun. temp fout"
+#define MSG_THERMAL_RUNAWAY                 "Therm. wegloop"
+#define MSG_ERR_MAXTEMP                     "Err: Max. temp"
+#define MSG_ERR_MINTEMP                     "Err: Min. temp"
+#define MSG_ERR_MAXTEMP_BED                 "Err: Max.tmp bed"
+#define MSG_ERR_MINTEMP_BED                 "Err: Min.tmp bed"
+#define MSG_END_HOUR                        "uur"
+#define MSG_END_MINUTE                      "minuten"
+#define MSG_HEATING                         "Voorwarmen..."
+#define MSG_HEATING_COMPLETE                "Voorverw. kompl."
+#define MSG_BED_HEATING                     "Bed voorverw."
+#define MSG_BED_DONE                        "Bed is voorverw."
 
-#if ENABLED(DELTA_CALIBRATION_MENU)
-  #define MSG_DELTA_CALIBRATE               "Delta Calibratie"
-  #define MSG_DELTA_CALIBRATE_X             "Kalibreer X"
-  #define MSG_DELTA_CALIBRATE_Y             "Kalibreer Y"
-  #define MSG_DELTA_CALIBRATE_Z             "Kalibreer Z"
-  #define MSG_DELTA_CALIBRATE_CENTER        "Kalibreer Midden"
-#endif // DELTA_CALIBRATION_MENU
+#define MSG_DELTA_CALIBRATE                 "Delta Calibratie"
+#define MSG_DELTA_CALIBRATE_X               "Kalibreer X"
+#define MSG_DELTA_CALIBRATE_Y               "Kalibreer Y"
+#define MSG_DELTA_CALIBRATE_Z               "Kalibreer Z"
+#define MSG_DELTA_CALIBRATE_CENTER          "Kalibreer Midden"
 
 #endif // LANGUAGE_NL_H

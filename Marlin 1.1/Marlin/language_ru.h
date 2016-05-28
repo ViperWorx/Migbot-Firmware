@@ -1,8 +1,30 @@
-﻿/**
+/**
+ * Marlin 3D Printer Firmware
+ * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ *
+ * Based on Sprinter and grbl.
+ * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+/**
  * Russian
  *
  * LCD Menu Messages
- * See also documentation/LCDLanguageFont.md
+ * See also https://github.com/MarlinFirmware/Marlin/wiki/LCD-Language
  *
  */
 #ifndef LANGUAGE_RU_H
@@ -20,7 +42,12 @@
 #define MSG_AUTOSTART                       "Автостарт"
 #define MSG_DISABLE_STEPPERS                "Выкл. двигатели"
 #define MSG_AUTO_HOME                       "Парковка"
+#define MSG_LEVEL_BED_HOMING                "Homing XYZ"
+#define MSG_LEVEL_BED_WAITING               "Click to Begin"
+#define MSG_LEVEL_BED_DONE                  "Leveling Done!"
+#define MSG_LEVEL_BED_CANCEL                "Cancel"
 #define MSG_SET_HOME_OFFSETS                "Запомнить парковку"
+#define MSG_HOME_OFFSETS_APPLIED            "Offsets applied"
 #define MSG_SET_ORIGIN                      "Запомнить ноль"
 #define MSG_PREHEAT_PLA                     "Преднагрев PLA"
 #define MSG_PREHEAT_PLA_N                   "Греть PLA Сопло "
@@ -67,10 +94,10 @@
 #define MSG_VZ_JERK                         "Vz-jerk"
 #define MSG_VE_JERK                         "Ve-jerk"
 #define MSG_VMAX                            "Vmax "
-#define MSG_X                               "x"
-#define MSG_Y                               "y"
-#define MSG_Z                               "z"
-#define MSG_E                               "e"
+#define MSG_X                               "X"
+#define MSG_Y                               "Y"
+#define MSG_Z                               "Z"
+#define MSG_E                               "E"
 #define MSG_VMIN                            "Vmin"
 #define MSG_VTRAV_MIN                       "VTrav min"
 #define MSG_AMAX                            "Amax"
@@ -116,21 +143,30 @@
 #define MSG_INIT_SDCARD                     "Иниц. карту"
 #define MSG_CNG_SDCARD                      "Сменить карту"
 #define MSG_ZPROBE_OUT                      "Z датчик вне стола"
-#define MSG_POSITION_UNKNOWN                "Паркуй X/Y перед Z"
+#define MSG_YX_UNHOMED                      "Паркуй X/Y перед Z"
 #define MSG_ZPROBE_ZOFFSET                  "Смещение Z"
 #define MSG_BABYSTEP_X                      "Babystep X"
 #define MSG_BABYSTEP_Y                      "Babystep Y"
 #define MSG_BABYSTEP_Z                      "Babystep Z"
 #define MSG_ENDSTOP_ABORT                   "Сработал концевик"
+#define MSG_HEATING_FAILED_LCD              "Разогрев не удался"
+#define MSG_ERR_REDUNDANT_TEMP              "Ошибка:Слишком горячо"
+#define MSG_THERMAL_RUNAWAY                 "THERMAL RUNAWAY"
+#define MSG_ERR_MAXTEMP                     "Ошибка: Т макс."
+#define MSG_ERR_MINTEMP                     "Ошибка: Т мин."
+#define MSG_ERR_MAXTEMP_BED                 "Ошибка:Т макс.стол"
+#define MSG_ERR_MINTEMP_BED                 "Ошибка:Т мин.стол"
 #define MSG_END_HOUR                        "часов"
 #define MSG_END_MINUTE                      "минут"
+#define MSG_HEATING                         "Нагреваю сопло..."
+#define MSG_HEATING_COMPLETE                "Нагрев выполнен"
+#define MSG_BED_HEATING                     "Нагреваю стол"
+#define MSG_BED_DONE                        "Стол разогрет"
 
-#if ENABLED(DELTA_CALIBRATION_MENU)
-  #define MSG_DELTA_CALIBRATE               "Калибровка Delta"
-  #define MSG_DELTA_CALIBRATE_X             "Калибровать X"
-  #define MSG_DELTA_CALIBRATE_Y             "Калибровать Y"
-  #define MSG_DELTA_CALIBRATE_Z             "Калибровать Z"
-  #define MSG_DELTA_CALIBRATE_CENTER        "Калибровать Center"
-#endif // DELTA_CALIBRATION_MENU
+#define MSG_DELTA_CALIBRATE                 "Калибровка Delta"
+#define MSG_DELTA_CALIBRATE_X               "Калибровать X"
+#define MSG_DELTA_CALIBRATE_Y               "Калибровать Y"
+#define MSG_DELTA_CALIBRATE_Z               "Калибровать Z"
+#define MSG_DELTA_CALIBRATE_CENTER          "Калибровать Center"
 
 #endif // LANGUAGE_RU_H

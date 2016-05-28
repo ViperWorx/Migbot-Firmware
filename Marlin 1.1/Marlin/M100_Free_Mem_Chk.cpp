@@ -1,25 +1,44 @@
+/**
+ * Marlin 3D Printer Firmware
+ * Copyright (C) 2016 MarlinFirmware [https://github.com/MarlinFirmware/Marlin]
+ *
+ * Based on Sprinter and grbl.
+ * Copyright (C) 2011 Camiel Gubbels / Erik van der Zalm
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ */
+
+/**
+ * M100 Free Memory Watcher
+ * 
+ * This code watches the free memory block between the bottom of the heap and the top of the stack.
+ * This memory block is initialized and watched via the M100 command.
+ * 
+ * M100 I Initializes the free memory block and prints vitals statistics about the area
+ * M100 F Identifies how much of the free memory block remains free and unused.  It also
+ *    detects and reports any corruption within the free memory block that may have
+ *    happened due to errant firmware.
+ * M100 D Does a hex display of the free memory block along with a flag for any errant
+ *    data that does not match the expected value.
+ * M100 C x Corrupts x locations within the free memory block.   This is useful to check the
+ *    correctness of the M100 F and M100 D commands.
+ * 
+ * Initial version by Roxy-3DPrintBoard
+ */
 #define M100_FREE_MEMORY_DUMPER     // Comment out to remove Dump sub-command
 #define M100_FREE_MEMORY_CORRUPTOR    // Comment out to remove Corrupt sub-command
-
-
-// M100 Free Memory Watcher
-//
-// This code watches the free memory block between the bottom of the heap and the top of the stack.
-// This memory block is initialized and watched via the M100 command.
-//
-// M100 I Initializes the free memory block and prints vitals statistics about the area
-// M100 F Identifies how much of the free memory block remains free and unused.  It also
-//    detects and reports any corruption within the free memory block that may have
-//    happened due to errant firmware.
-// M100 D Does a hex display of the free memory block along with a flag for any errant
-//    data that does not match the expected value.
-// M100 C x Corrupts x locations within the free memory block.   This is useful to check the
-//    correctness of the M100 F and M100 D commands.
-//
-// Initial version by Roxy-3DPrintBoard
-//
-//
-
 
 #include "Marlin.h"
 
@@ -118,8 +137,10 @@ void gcode_M100() {
   // other vital statistics that define the memory pool.
   //
   if (code_seen('F')) {
-    int max_addr = (int) __brkval;
-    int max_cnt = 0;
+    #if 0
+      int max_addr = (int) __brkval;
+      int max_cnt = 0;
+    #endif
     int block_cnt = 0;
     ptr = (unsigned char*) __brkval;
     sp = top_of_stack();
@@ -136,10 +157,12 @@ void gcode_M100() {
           i += j;
           block_cnt++;
         }
-        if (j > max_cnt) {      // We don't do anything with this information yet
-          max_cnt  = j;     // but we do know where the biggest free memory block is.
-          max_addr = (int) ptr + i;
-        }
+        #if 0
+          if (j > max_cnt) {      // We don't do anything with this information yet
+            max_cnt  = j;     // but we do know where the biggest free memory block is.
+            max_addr = (int) ptr + i;
+          }
+        #endif
       }
     }
     if (block_cnt > 1)
@@ -157,10 +180,10 @@ void gcode_M100() {
     x = code_value();
     SERIAL_ECHOLNPGM("Corrupting free memory block.\n");
     ptr = (unsigned char*) __brkval;
-    SERIAL_ECHOPAIR("\n__brkval : ", (long) ptr);
+    SERIAL_ECHOPAIR("\n__brkval : ", ptr);
     ptr += 8;
     sp = top_of_stack();
-    SERIAL_ECHOPAIR("\nStack Pointer : ", (long) sp);
+    SERIAL_ECHOPAIR("\nStack Pointer : ", sp);
     SERIAL_ECHOLNPGM("\n");
     n = sp - ptr - 64;    // -64 just to keep us from finding interrupt activity that
     // has altered the stack.
@@ -181,10 +204,10 @@ void gcode_M100() {
   if (m100_not_initialized || code_seen('I')) {       // If no sub-command is specified, the first time
     SERIAL_ECHOLNPGM("Initializing free memory block.\n");    // this happens, it will Initialize.
     ptr = (unsigned char*) __brkval;        // Repeated M100 with no sub-command will not destroy the
-    SERIAL_ECHOPAIR("\n__brkval : ", (long) ptr);     // state of the initialized free memory pool.
+    SERIAL_ECHOPAIR("\n__brkval : ", ptr);     // state of the initialized free memory pool.
     ptr += 8;
     sp = top_of_stack();
-    SERIAL_ECHOPAIR("\nStack Pointer : ", (long) sp);
+    SERIAL_ECHOPAIR("\nStack Pointer : ", sp);
     SERIAL_ECHOLNPGM("\n");
     n = sp - ptr - 64;    // -64 just to keep us from finding interrupt activity that
     // has altered the stack.
@@ -194,7 +217,7 @@ void gcode_M100() {
       *(ptr + i) = (unsigned char) 0xe5;
     for (i = 0; i < n; i++) {
       if (*(ptr + i) != (unsigned char) 0xe5) {
-        SERIAL_ECHOPAIR("? address : ", (unsigned long) ptr + i);
+        SERIAL_ECHOPAIR("? address : ", ptr + i);
         SERIAL_ECHOPAIR("=", *(ptr + i));
         SERIAL_ECHOLNPGM("\n");
       }
