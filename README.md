@@ -1,4 +1,7 @@
 # Ax's Migbot Prusa i3 Firmware
+
+## Note: I am no longer able to update this firmware due to having changed all 3 of my Migbots to a Bowden Extruder and offsets will be wrong due to modifications to the carriage.
+
 This is a preconfigured version of the firmware for the Migbot Prusa i3. This has been done as the default firmware is junk and is totally wrong for these Acrylic framed printers. 
 
 Use Arduino IDE 1.6 to upload all firmware as previous versions of the Arduino software had a bug in the compiler.
